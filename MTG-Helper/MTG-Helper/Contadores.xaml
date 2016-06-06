@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="MTG_Helper.MainPage"
+    x:Class="MTG_Helper.Contadores"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:MTG_Helper"
@@ -8,14 +8,6 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-
-        <Image Source="Assets/MTGHelperLogo.jpg" Stretch="Fill"  Height="100" Width="100" HorizontalAlignment="Left"/>
-        
-        <Frame Name="MyFrame" Grid.Row="1"/>
-        
+        <Image Source="Assets/MainPage.png" Stretch="None" />
     </Grid>
 </Page>
