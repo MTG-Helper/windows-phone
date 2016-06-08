@@ -13,29 +13,18 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace MTG_Helper
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Buscador : Page
     {
-        public MainPage()
+        public Buscador()
         {
             this.InitializeComponent();
-            MyFrame.Navigate(typeof(Contadores));
-        }
-
-        private void Home_Click(object sender, RoutedEventArgs e)
-        {
-            MyFrame.Navigate(typeof(Contadores));
-        }
-
-        private void Buscador_Click(object sender, RoutedEventArgs e)
-        {
-            MyFrame.Navigate(typeof(Buscador));
         }
     }
 }
