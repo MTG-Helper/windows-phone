@@ -1,7 +1,7 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
-namespace MTG_Helper.Test
+namespace MTG_Helper.Tests
 {
     [TestClass]
     public class UnitTest1
