@@ -13,7 +13,7 @@ namespace MTG_Helper.Tests
         }
 
         [TestMethod]
-        public void TestQueDemuestraQueEstoSiFUnciona()
+        public void TestMethod2()
         {
             Assert.IsTrue(true);
         }
