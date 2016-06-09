@@ -11,5 +11,12 @@ namespace MTG_Helper.Tests
         {
             Assert.IsTrue(true);
         }
+
+        [TestMethod]
+        public void TestQueDemuestraQueEstoSiFUnciona()
+        {
+            Assert.IsTrue(true);
+        }
+
     }
 }
