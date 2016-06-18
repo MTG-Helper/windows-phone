@@ -16,6 +16,8 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Name="Home" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="36" Click="Home_Click"/>
             <Button Name="Buscador" FontFamily="Segoe MDL2 Assets" Content="&#xE11A;" FontSize="36" Click="Buscador_Click"/>
+            <Button Name="BuscadorImagen" FontFamily="Segoe MDL2 Assets" Content="&#xE11A;" FontSize="36" Click="BuscadorImagen_Click"/>
+            
         </StackPanel>
         
         <Frame Name="MyFrame" Grid.Row="1"/>

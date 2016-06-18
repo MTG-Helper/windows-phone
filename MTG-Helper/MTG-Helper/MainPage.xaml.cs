@@ -37,5 +37,9 @@ namespace MTG_Helper
         {
             MyFrame.Navigate(typeof(Buscador));
         }
+        private void BuscadorImagen_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(BuscadorImagen));
+        }
     }
 }
