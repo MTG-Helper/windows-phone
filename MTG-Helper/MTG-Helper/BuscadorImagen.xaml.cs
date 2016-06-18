@@ -38,9 +38,7 @@ namespace MTG_Helper
             var filtered = selectionItems.Where(p => p.StartsWith(autoSuggestBox.Text)).ToArray();
             autoSuggestBox.ItemsSource = filtered;
         }
-
-
-
+        
         private void MyAutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
             if (args.ChosenSuggestion != null) // bugFix

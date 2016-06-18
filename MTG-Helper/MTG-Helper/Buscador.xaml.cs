@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,33 @@ namespace MTG_Helper
     /// </summary>
     public sealed partial class Buscador : Page
     {
+        string[] selectionItems;
+
         public Buscador()
         {
+            GenerateCardsList();
             this.InitializeComponent();
+            myListBox.ItemsSource = selectionItems;
+        }
+
+        private void MyAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            var autoSuggestBox = (AutoSuggestBox)sender;
+            var filtered = selectionItems.Where(p => p.StartsWith(autoSuggestBox.Text)).ToArray();
+            autoSuggestBox.ItemsSource = filtered;
+        }
+
+        private void MyAutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (args.ChosenSuggestion != null) // bugFix
+            {
+                myListBox.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void GenerateCardsList()
+        {
+            selectionItems = System.IO.File.ReadAllLines(@"SOI_CardsName.txt");
         }
     }
 }

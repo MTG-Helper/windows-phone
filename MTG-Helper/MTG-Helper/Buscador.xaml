@@ -8,6 +8,21 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="Buscador" FontSize="42"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <AutoSuggestBox Name="MyAutoSuggestBox"
+                        Margin="20,0,0,20"
+                        HorizontalAlignment="Left"
+                        QueryIcon="Find"
+                        PlaceholderText="Nombre de la Carta"
+                        Width="300"
+                        TextChanged="MyAutoSuggestBox_TextChanged"
+                        AutoMaximizeSuggestionArea="True"
+                        Visibility="Visible"
+                        QuerySubmitted="MyAutoSuggestBox_QuerySubmitted"
+                        />
+        <ListBox Name="myListBox" Grid.Row="1" Visibility="Visible"/>
     </Grid>
 </Page>
