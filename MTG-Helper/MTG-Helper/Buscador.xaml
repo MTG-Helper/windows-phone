@@ -10,6 +10,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <AutoSuggestBox Name="MyAutoSuggestBox"
@@ -22,12 +23,23 @@
                         Visibility="Visible"
                         QuerySubmitted="MyAutoSuggestBox_QuerySubmitted"/>
         <ListBox Name="myListBox" 
-                 Grid.Row="1" 
+                 Grid.Row="2" 
                  Visibility="Visible" 
                  SelectionMode="Single"
                  SelectionChanged="myListBox_SelectionChanged"
                  Background="LightCyan"/>
-        <StackPanel Name="myStackPanel" Visibility="Collapsed" Grid.Row="1" Orientation="Vertical" Background="LightBlue"/>
-        <Image  Name="MyImage" Height="400"  Stretch="Uniform" HorizontalAlignment="Left" Visibility="Collapsed" Grid.Row="1" PointerPressed="MyImage_PointerPressed" />
+        <StackPanel Name="myStackPanel" Visibility="Collapsed" Grid.Row="2" Orientation="Vertical" Background="LightBlue"/>
+        <Image  Name="MyImage" 
+                Height="400"  
+                Stretch="Uniform" 
+                HorizontalAlignment="Left" 
+                Visibility="Collapsed" 
+                Grid.Row="2" 
+                PointerPressed="MyImage_PointerPressed" 
+                ImageOpened="MyImage_ImageOpened"/>
+        <StackPanel Name="tmpPanel" Visibility="Collapsed" Grid.Row="1" Background="AntiqueWhite">
+            <TextBlock Text="Loading..." FontSize="40" Margin="0,40,0,0"/>
+            <ProgressRing IsActive="True" Width="160" Height="160" Margin="0,60,0,60"/>
+        </StackPanel>
     </Grid>
 </Page>

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -48,7 +49,6 @@ namespace MTG_Helper
         {
             if (args.ChosenSuggestion != null) // bugFix
             {
-                MyImage.Visibility = Visibility.Collapsed;
                 MostrarDatosDeLaCartaSeleccionada(args.ChosenSuggestion.ToString());
             }
         }
@@ -57,16 +57,17 @@ namespace MTG_Helper
         {
             MostrarDatosDeLaCartaSeleccionada(myListBox.SelectedItem.ToString());
         }
+
         void verImagen_Click(object sender, RoutedEventArgs e)
         {
-            //LoadImage(actualMultiverseId);
+            CloseMyPanelOpenTmpPanel();
             LoadImage(actualMultiverseId);
-            myStackPanel.Visibility = Visibility.Collapsed;
-            MyImage.Visibility = Visibility.Visible;
         }
 
         private void MostrarDatosDeLaCartaSeleccionada(string nombreDeLaCarta)
         {
+            MyImage.Visibility = Visibility.Collapsed;
+            CloseListOpenMyPanel();
             
             //casos especiales if rarity equal "Basic Land"
             //datos iguales, cambia imagen y multiverseid
@@ -128,6 +129,15 @@ namespace MTG_Helper
                 power.Margin = textMargin;
                 myStackPanel.Children.Add(power);
             }
+            if (cardJO["rarity"] != null)
+            {
+                TextBlock rarity = new TextBlock();
+                rarity.Text = "Rarity: " + (string)cardJO["rarity"];
+                rarity.Width = 310;
+                rarity.TextWrapping = TextWrapping.Wrap;
+                rarity.Margin = textMargin;
+                myStackPanel.Children.Add(rarity);
+            }
             if (cardJO["number"] != null)
             {
                 TextBlock number = new TextBlock();
@@ -145,13 +155,8 @@ namespace MTG_Helper
 
             if (cardJO["multiverseid"]!=null)
                 actualMultiverseId=(string)cardJO["multiverseid"];
-
             //(string)cardJO["cmc"];
             //(string)cardJO["colors"];
-            //(string)cardJO["rariry"];
-
-            myListBox.Visibility = Visibility.Collapsed;
-            myStackPanel.Visibility = Visibility.Visible;
         }
 
         public string RetornaUnaCarta(string nombreDeLaCarta)
@@ -170,10 +175,15 @@ namespace MTG_Helper
             
             return tokenCard.ToString();
         }
+
         private void LoadImage(string multiverseid)
         {
             var url = CreateUrlWithId(multiverseid);
             Uri uri = new Uri(url, UriKind.Absolute);
+            //IRandomAccessStream a = await RandomAccessStreamReference.CreateFromUri(uri).OpenReadAsync();
+            //BitmapImage i = new BitmapImage();
+            //await i.SetSourceAsync(a);
+            //MyImage.Source = i;
             MyImage.Source = new BitmapImage(uri);
         }
         
@@ -193,6 +203,30 @@ namespace MTG_Helper
         {
             MyImage.Visibility = Visibility.Collapsed;
             myStackPanel.Visibility = Visibility.Visible;
+        }
+
+        private void CloseListOpenMyPanel()
+        {
+            myListBox.Visibility = Visibility.Collapsed;
+            myStackPanel.Visibility = Visibility.Visible;
+        }
+
+        private void CloseMyPanelOpenMyImage()
+        {
+            myStackPanel.Visibility = Visibility.Collapsed;
+            MyImage.Visibility = Visibility.Visible;
+        }
+
+        private void CloseMyPanelOpenTmpPanel()
+        {
+            myStackPanel.Visibility = Visibility.Collapsed;
+            tmpPanel.Visibility = Visibility.Visible;
+        }
+        
+        private void CloseTmpPanelOpenMyImage()
+        {
+            tmpPanel.Visibility = Visibility.Collapsed;
+            MyImage.Visibility = Visibility.Visible;
         }
 
         private int FixNombreDeCartas(string nombreDeLaCarta)
@@ -304,5 +338,9 @@ namespace MTG_Helper
             return multiverseid;
         }
 
+        private void MyImage_ImageOpened(object sender, RoutedEventArgs e)
+        {
+            CloseTmpPanelOpenMyImage();
+        }
     }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Storage.Streams;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,6 +32,13 @@ namespace MTG_Helper
         {
             GenerateCardsList();
             this.InitializeComponent();
+            myPanel.Visibility = Visibility.Collapsed;
+            ProgressRing pr = new ProgressRing();
+            pr.IsActive = true;
+            pr.Height = 200;
+            pr.Width = 200;
+            pr.Margin = new Thickness(0,20,0,0);
+            myPanel.Children.Add(pr);
         }
 
         private void MyAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
@@ -44,7 +53,10 @@ namespace MTG_Helper
             if (args.ChosenSuggestion != null) // bugFix
             {
                 suggestionChosed = args.ChosenSuggestion.ToString();
-                MyTextBlock.Text = "Carta Elegida: " + suggestionChosed;
+                
+                myPanel.Visibility = Visibility.Visible;
+               
+                //MyTextBlock.Text = "Carta Elegida: " + suggestionChosed;
                 LoadImage();
             }
 
@@ -55,13 +67,19 @@ namespace MTG_Helper
             selectionItems = System.IO.File.ReadAllLines(@"Cards.txt");
         }
 
+        
+
         private void LoadImage()
         {
             var url = CreateUrlWithCardNameAndId(suggestionChosed);
             Uri uri = new Uri(url, UriKind.Absolute);
+            //IRandomAccessStream a = await RandomAccessStreamReference.CreateFromUri(uri).OpenReadAsync();
+            //BitmapImage i = new BitmapImage();
+            //await i.SetSourceAsync(a);
+            //MyImage.Source = i;
             MyImage.Source = new BitmapImage(uri);
         }
-     
+        
         static string CreateUrlWithId(string multiverseId)
         {
             string urlStart = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=";
@@ -87,6 +105,11 @@ namespace MTG_Helper
                 if (item == ':') { id = cardNamePlusId.Substring(pos); }
             }
             return id;
+        }
+        
+        private void MyImage_ImageOpened(object sender, RoutedEventArgs e)
+        {
+            myPanel.Visibility = Visibility.Collapsed;
         }
     }
 }
