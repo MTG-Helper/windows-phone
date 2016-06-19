@@ -20,14 +20,14 @@
                         TextChanged="MyAutoSuggestBox_TextChanged"
                         AutoMaximizeSuggestionArea="True"
                         Visibility="Visible"
-                        QuerySubmitted="MyAutoSuggestBox_QuerySubmitted"
-                        />
+                        QuerySubmitted="MyAutoSuggestBox_QuerySubmitted"/>
         <ListBox Name="myListBox" 
                  Grid.Row="1" 
                  Visibility="Visible" 
                  SelectionMode="Single"
-                 SelectionChanged="myListBox_SelectionChanged"/>
-        <StackPanel Name="myStackPanel" Visibility="Collapsed" Grid.Row="1" Orientation="Vertical" />
-
+                 SelectionChanged="myListBox_SelectionChanged"
+                 Background="LightCyan"/>
+        <StackPanel Name="myStackPanel" Visibility="Collapsed" Grid.Row="1" Orientation="Vertical" Background="LightBlue"/>
+        <Image  Name="MyImage" Height="400"  Stretch="Uniform" HorizontalAlignment="Left" Visibility="Collapsed" Grid.Row="1" PointerPressed="MyImage_PointerPressed" />
     </Grid>
 </Page>

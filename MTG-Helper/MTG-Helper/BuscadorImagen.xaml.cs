@@ -61,20 +61,19 @@ namespace MTG_Helper
             Uri uri = new Uri(url, UriKind.Absolute);
             MyImage.Source = new BitmapImage(uri);
         }
-
+     
+        static string CreateUrlWithId(string multiverseId)
+        {
+            string urlStart = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=";
+            string urlEnd = "&type=card";
+            return urlStart + multiverseId + urlEnd;
+        }
 
         static string CreateUrlWithCardNameAndId(string cardNameWithId)
         {
             var id = GetId(cardNameWithId);
             var url = CreateUrlWithId(id);
             return url;
-        }
-
-        static string CreateUrlWithId(string multiverseId)
-        {
-            string urlStart = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=";
-            string urlEnd = "&type=card";
-            return urlStart + multiverseId + urlEnd;
         }
 
         static string GetId(string cardNamePlusId)

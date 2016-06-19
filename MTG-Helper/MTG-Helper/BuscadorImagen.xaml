@@ -10,11 +10,10 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel>
             <AutoSuggestBox Name="MyAutoSuggestBox"
-                        Margin="20,0,0,20"
                         HorizontalAlignment="Left"
                         QueryIcon="Find"
                         PlaceholderText="Nombre de la Carta"
-                        Width="300"
+                        Width="310"
                         TextChanged="MyAutoSuggestBox_TextChanged"
                         AutoMaximizeSuggestionArea="True"
                         Visibility="Visible"

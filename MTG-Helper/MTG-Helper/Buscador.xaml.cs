@@ -4,6 +4,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -13,6 +15,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -25,6 +28,7 @@ namespace MTG_Helper
     public sealed partial class Buscador : Page
     {
         string[] selectionItems;
+        string actualMultiverseId;
 
         public Buscador()
         {
@@ -44,6 +48,7 @@ namespace MTG_Helper
         {
             if (args.ChosenSuggestion != null) // bugFix
             {
+                MyImage.Visibility = Visibility.Collapsed;
                 MostrarDatosDeLaCartaSeleccionada(args.ChosenSuggestion.ToString());
             }
         }
@@ -52,10 +57,17 @@ namespace MTG_Helper
         {
             MostrarDatosDeLaCartaSeleccionada(myListBox.SelectedItem.ToString());
         }
+        void verImagen_Click(object sender, RoutedEventArgs e)
+        {
+            //LoadImage(actualMultiverseId);
+            LoadImage(actualMultiverseId);
+            myStackPanel.Visibility = Visibility.Collapsed;
+            MyImage.Visibility = Visibility.Visible;
+        }
 
         private void MostrarDatosDeLaCartaSeleccionada(string nombreDeLaCarta)
         {
-
+            
             //casos especiales if rarity equal "Basic Land"
             //datos iguales, cambia imagen y multiverseid
 
@@ -65,7 +77,7 @@ namespace MTG_Helper
 
             myStackPanel.Children.Clear();
 
-            Thickness textMargin = new Thickness(0, 0, 0, 10);
+            Thickness textMargin = new Thickness(0, 0, 0, 12);
             if (cardJO["name"] != null)
             {
                 TextBlock name = new TextBlock();
@@ -79,6 +91,15 @@ namespace MTG_Helper
                 manaCost.Text = (string)cardJO["manaCost"];
                 manaCost.Margin = textMargin;
                 myStackPanel.Children.Add(manaCost);
+            }
+            if (cardJO["type"] != null)
+            {
+                TextBlock type = new TextBlock();
+                type.Text = (string)cardJO["type"];
+                type.Width = 310;
+                type.TextWrapping = TextWrapping.Wrap;
+                type.Margin = textMargin;
+                myStackPanel.Children.Add(type);
             }
             if (cardJO["text"] != null)
             {
@@ -98,20 +119,36 @@ namespace MTG_Helper
                 flavor.Margin = textMargin;
                 myStackPanel.Children.Add(flavor);
             }
-            
-            
+            if (cardJO["power"] != null)
+            {
+                TextBlock power = new TextBlock();
+                power.Text = (string)cardJO["power"] + " / " + (string)cardJO["toughness"];
+                power.Width = 310;
+                power.TextWrapping = TextWrapping.Wrap;
+                power.Margin = textMargin;
+                myStackPanel.Children.Add(power);
+            }
+            if (cardJO["number"] != null)
+            {
+                TextBlock number = new TextBlock();
+                number.Text = "Card number: "+(string)cardJO["number"];
+                number.Width = 310;
+                number.TextWrapping = TextWrapping.Wrap;
+                number.Margin = textMargin;
+                myStackPanel.Children.Add(number);
+            }
+
+            Button verImagen = new Button();
+            verImagen.Content = "Ver Imagen";
+            verImagen.Click += verImagen_Click;
+            myStackPanel.Children.Add(verImagen);
+
+            if (cardJO["multiverseid"]!=null)
+                actualMultiverseId=(string)cardJO["multiverseid"];
+
             //(string)cardJO["cmc"];
             //(string)cardJO["colors"];
-            //(string)cardJO["flavor"];
-            //(string)cardJO["manaCost"];
-            //(string)cardJO["multiverseid"];
-            //(string)cardJO["name"];
-            //(string)cardJO["number"];
             //(string)cardJO["rariry"];
-            //(string)cardJO["power"];
-            //(string)cardJO["text"];
-            //(string)cardJO["thoughness"];
-            //(string)cardJO["type"];
 
             myListBox.Visibility = Visibility.Collapsed;
             myStackPanel.Visibility = Visibility.Visible;
@@ -133,10 +170,29 @@ namespace MTG_Helper
             
             return tokenCard.ToString();
         }
+        private void LoadImage(string multiverseid)
+        {
+            var url = CreateUrlWithId(multiverseid);
+            Uri uri = new Uri(url, UriKind.Absolute);
+            MyImage.Source = new BitmapImage(uri);
+        }
+        
+        static string CreateUrlWithId(string multiverseid)
+        {
+            string urlStart = "http://gatherer.wizards.com/Handlers/Image.ashx?multiverseid=";
+            string urlEnd = "&type=card";
+            return urlStart + multiverseid + urlEnd;
+        }
 
         private void GenerateCardsList()
         {
             selectionItems = System.IO.File.ReadAllLines(@"SOI_CardsName.txt");
+        }
+
+        private void MyImage_PointerPressed(object sender, PointerRoutedEventArgs e)
+        {
+            MyImage.Visibility = Visibility.Collapsed;
+            myStackPanel.Visibility = Visibility.Visible;
         }
 
         private int FixNombreDeCartas(string nombreDeLaCarta)
@@ -209,13 +265,13 @@ namespace MTG_Helper
                     multiverseid = 409813;
                     break;
                 case "Liliana's Indignation":
-                    multiverseid = 409737;
+                    multiverseid = 409870;
                     break;
                 case "Murderer's Axe":
                     multiverseid = 410025;
                     break;
                 case "Nahiri's Machinations":
-                    multiverseid = 409737;
+                    multiverseid = 409767;
                     break;
                 case "Olivia's Bloodsworn":
                     multiverseid = 409877;
@@ -238,11 +294,15 @@ namespace MTG_Helper
                 case "Wolf of Devil's Breach":
                     multiverseid = 409949;
                     break;
+                case "Devils' Playground":
+                    multiverseid = 409903;
+                    break;
                 default:
                     multiverseid = 0;
                     break;
             }
             return multiverseid;
         }
+
     }
 }
