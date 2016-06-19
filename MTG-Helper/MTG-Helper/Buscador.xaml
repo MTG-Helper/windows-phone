@@ -7,7 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid  Background="AntiqueWhite">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
@@ -22,12 +22,14 @@
                         AutoMaximizeSuggestionArea="True"
                         Visibility="Visible"
                         QuerySubmitted="MyAutoSuggestBox_QuerySubmitted"/>
-        <ListBox Name="myListBox" 
+
+        <ListView Name="myListBox" 
                  Grid.Row="2" 
                  Visibility="Visible" 
                  SelectionMode="Single"
                  SelectionChanged="myListBox_SelectionChanged"
                  Background="LightCyan"/>
+
         <StackPanel Name="myStackPanel" Visibility="Collapsed" Grid.Row="2" Orientation="Vertical" Background="LightBlue"/>
         <Image  Name="MyImage" 
                 Height="400"  
@@ -37,7 +39,7 @@
                 Grid.Row="2" 
                 PointerPressed="MyImage_PointerPressed" 
                 ImageOpened="MyImage_ImageOpened"/>
-        <StackPanel Name="tmpPanel" Visibility="Collapsed" Grid.Row="1" Background="AntiqueWhite">
+        <StackPanel Name="tmpPanel" Visibility="Collapsed" Grid.Row="1">
             <TextBlock Text="Loading..." FontSize="40" Margin="0,40,0,0"/>
             <ProgressRing IsActive="True" Width="160" Height="160" Margin="0,60,0,60"/>
         </StackPanel>
