@@ -13,16 +13,21 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <AutoSuggestBox Name="MyAutoSuggestBox"
-                        Margin="20,0,0,20"
                         HorizontalAlignment="Left"
                         QueryIcon="Find"
                         PlaceholderText="Nombre de la Carta"
-                        Width="300"
+                        Width="310"
                         TextChanged="MyAutoSuggestBox_TextChanged"
                         AutoMaximizeSuggestionArea="True"
                         Visibility="Visible"
                         QuerySubmitted="MyAutoSuggestBox_QuerySubmitted"
                         />
-        <ListBox Name="myListBox" Grid.Row="1" Visibility="Visible"/>
+        <ListBox Name="myListBox" 
+                 Grid.Row="1" 
+                 Visibility="Visible" 
+                 SelectionMode="Single"
+                 SelectionChanged="myListBox_SelectionChanged"/>
+        <StackPanel Name="myStackPanel" Visibility="Collapsed" Grid.Row="1" Orientation="Vertical" />
+
     </Grid>
 </Page>
