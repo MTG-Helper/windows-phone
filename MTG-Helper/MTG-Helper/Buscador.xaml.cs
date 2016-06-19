@@ -123,7 +123,7 @@ namespace MTG_Helper
             JObject jsonSet = JObject.Parse(File.ReadAllText(@actualSet)); //this method not work if the file not has json extencion
             JToken tokenCard;
             
-            int multiverseid = FixCartasConMismoNombre(nombreDeLaCarta);
+            int multiverseid = FixNombreDeCartas(nombreDeLaCarta);
             if (multiverseid!=0)
             {
                 tokenCard = jsonSet.SelectToken("$.cards[?(@.multiverseid ==" + multiverseid.ToString() + ")]");
@@ -139,7 +139,7 @@ namespace MTG_Helper
             selectionItems = System.IO.File.ReadAllLines(@"SOI_CardsName.txt");
         }
 
-        private int FixCartasConMismoNombre(string nombreDeLaCarta)
+        private int FixNombreDeCartas(string nombreDeLaCarta)
         {
             int multiverseid;
 
@@ -180,6 +180,63 @@ namespace MTG_Helper
                     break;
                 case "Island3":
                     multiverseid = 410055;
+                    break;
+                case "Avacyn's Judgment":
+                    multiverseid = 409895;
+                    break;
+                case "Cathar's Companion":
+                    multiverseid = 409747;
+                    break;
+                case "Chaplain's Blessing":
+                    multiverseid = 409748;
+                    break;
+                case "Geralf's Masterpiece":
+                    multiverseid = 409808;
+                    break;
+                case "Ghoulcaller's Accomplice":
+                    multiverseid = 409860;
+                    break;
+                case "Gisa's Bidding":
+                    multiverseid = 409862;
+                    break;
+                case "Gryff's Boon":
+                    multiverseid = 409758;
+                    break;
+                case "Inquisitor's Ox":
+                    multiverseid = 409763;
+                    break;
+                case "Jace's Scrutiny":
+                    multiverseid = 409813;
+                    break;
+                case "Liliana's Indignation":
+                    multiverseid = 409737;
+                    break;
+                case "Murderer's Axe":
+                    multiverseid = 410025;
+                    break;
+                case "Nahiri's Machinations":
+                    multiverseid = 409737;
+                    break;
+                case "Olivia's Bloodsworn":
+                    multiverseid = 409877;
+                    break;
+                case "Sigarda, Heron's Grace":
+                    multiverseid = 410015;
+                    break;
+                case "Slayer's Plate":
+                    multiverseid = 410031;
+                    break;
+                case "Tamiyo's Journal":
+                    multiverseid = 410032;
+                    break;
+                case "Thalia's Lieutenant":
+                    multiverseid = 409783;
+                    break;
+                case "Ulrich's Kindred":
+                    multiverseid = 409943;
+                    break;
+                case "Wolf of Devil's Breach":
+                    multiverseid = 409949;
                     break;
                 default:
                     multiverseid = 0;
