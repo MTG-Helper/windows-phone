@@ -30,6 +30,8 @@ namespace MTG_Helper
     {
         string[] selectionItems;
         string actualMultiverseId;
+        string actualSet = "SOI.txt";
+        //string actualSet = "EMA.txt";
 
         public Buscador()
         {
@@ -161,7 +163,6 @@ namespace MTG_Helper
 
         public string RetornaUnaCarta(string nombreDeLaCarta)
         {
-            string actualSet = "SOI.txt"; 
             JObject jsonSet = JObject.Parse(File.ReadAllText(@actualSet)); //this method not work if the file not has json extencion
             JToken tokenCard;
             
@@ -196,7 +197,28 @@ namespace MTG_Helper
 
         private void GenerateCardsList()
         {
-            selectionItems = System.IO.File.ReadAllLines(@"SOI_CardsName.txt");
+            //selectionItems = System.IO.File.ReadAllLines(@"SOI_CardsName.txt");
+            List<string> myList = new List<string>();
+
+            string lastItem = ""; //Fix nombres repetidos
+            foreach (var item in RetornaTodasLasCartas())
+            {
+                // FIX nombres repetidos
+                string actualItem = (string)item["name"];
+                string fixItem = FixNombreDeCartasRepetidas(actualItem,lastItem);
+                lastItem = fixItem;
+
+                myList.Add(fixItem);
+            }
+            selectionItems = myList.ToArray<string>();
+            Array.Sort(selectionItems);
+        }
+
+        public IEnumerable<JToken> RetornaTodasLasCartas()
+        {
+            JObject jsonSet = JObject.Parse(File.ReadAllText(@actualSet));
+            IEnumerable<JToken> tokenCards = jsonSet.SelectTokens("$.cards[?(@.name != 'trash')]");
+            return tokenCards;
         }
 
         private void MyImage_PointerPressed(object sender, PointerRoutedEventArgs e)
@@ -336,6 +358,51 @@ namespace MTG_Helper
                     break;
             }
             return multiverseid;
+        }
+
+        private string FixNombreDeCartasRepetidas(string nombreDeLaCartaActual, string nombreDeLaCartaAnterior)
+        {
+            string name;
+
+            switch (nombreDeLaCartaActual)
+            {
+                case "Forest":
+                    if (nombreDeLaCartaAnterior.Equals("Forest1"))
+                        name = "Forest2";
+                    else if (nombreDeLaCartaAnterior.Equals("Forest2"))
+                        name = "Forest3";
+                    else
+                        name = "Forest1";
+                    break;
+                case "Mountain":
+                    if (nombreDeLaCartaAnterior.Equals("Mountain1"))
+                        name = "Mountain2";
+                    else if (nombreDeLaCartaAnterior.Equals("Mountain2"))
+                        name = "Mountain3";
+                    else
+                        name = "Mountain1";
+                    break;
+                case "Swamp":
+                    if (nombreDeLaCartaAnterior.Equals("Swamp1"))
+                        name = "Swamp2";
+                    else if (nombreDeLaCartaAnterior.Equals("Swamp2"))
+                        name = "Swamp3";
+                    else
+                        name = "Swamp1";
+                    break;
+                case "Island":
+                    if (nombreDeLaCartaAnterior.Equals("Island1"))
+                        name = "Island2";
+                    else if (nombreDeLaCartaAnterior.Equals("Island2"))
+                        name = "Island3";
+                    else
+                        name = "Island1";
+                    break;
+                default:
+                    name = nombreDeLaCartaActual;
+                    break;
+            }
+            return name;
         }
 
         private void MyImage_ImageOpened(object sender, RoutedEventArgs e)
