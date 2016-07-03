@@ -116,8 +116,14 @@
     <Compile Include="BuscadorImagen.xaml.cs">
       <DependentUpon>BuscadorImagen.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Coin.xaml.cs">
+      <DependentUpon>Coin.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Contadores.xaml.cs">
       <DependentUpon>Contadores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dice.xaml.cs">
+      <DependentUpon>Dice.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -167,7 +173,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Coin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Contadores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

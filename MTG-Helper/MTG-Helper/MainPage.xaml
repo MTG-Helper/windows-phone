@@ -18,8 +18,8 @@
             <Button Name="Scoreboard" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="36" Click="Scoreboard_Click"/>
             <Button Name="Buscador" FontFamily="Segoe MDL2 Assets" Content="&#xE11A;" FontSize="36" Click="Buscador_Click"/>
             <!--Button Name="BuscadorImagen" FontFamily="Segoe MDL2 Assets" Content="&#xE11A;" FontSize="36" Click="BuscadorImagen_Click"/-->
-            <Button Name="Coin" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="36"/>
-            <Button Name="Dice" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="36"/>
+            <Button Name="Coin" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="36" Click="Coin_Click"/>
+            <Button Name="Dice" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;" FontSize="36" Click="Dice_Click"/>
             
         </StackPanel>
         

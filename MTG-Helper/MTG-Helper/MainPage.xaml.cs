@@ -46,5 +46,15 @@ namespace MTG_Helper
         {
             MyFrame.Navigate(typeof(Scoreboard));
         }
+
+        private void Coin_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(Coin));
+        }
+
+        private void Dice_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(Dice));
+        }
     }
 }
