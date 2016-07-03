@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
+
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace MTG_Helper
@@ -25,7 +26,7 @@ namespace MTG_Helper
         public MainPage()
         {
             this.InitializeComponent();
-            MyFrame.Navigate(typeof(Contadores));
+            MyFrame.Navigate(typeof(Scoreboard));
         }
 
         private void Home_Click(object sender, RoutedEventArgs e)
@@ -40,6 +41,10 @@ namespace MTG_Helper
         private void BuscadorImagen_Click(object sender, RoutedEventArgs e)
         {
             MyFrame.Navigate(typeof(BuscadorImagen));
+        }
+        private void Scoreboard_Click(object sender, RoutedEventArgs e)
+        {
+            MyFrame.Navigate(typeof(Scoreboard));
         }
     }
 }

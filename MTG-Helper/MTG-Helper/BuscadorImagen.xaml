@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
         <StackPanel>
             
-            <AutoSuggestBox Name="MyAutoSuggestBox"
+            <!--AutoSuggestBox Name="MyAutoSuggestBox"
                         HorizontalAlignment="Left"
                         QueryIcon="Find"
                         PlaceholderText="Nombre de la Carta"
@@ -24,7 +24,7 @@
                         AutoMaximizeSuggestionArea="True"
                         Visibility="Visible"
                         QuerySubmitted="MyAutoSuggestBox_QuerySubmitted"
-                         />
+                         /-->
             
             <StackPanel Name="myPanel" Orientation="Vertical" Grid.Row="1" >
                 <!--TextBlock Name="MyTextBlock" Width="300"/-->

@@ -93,6 +93,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="project.json" />
+    <Content Include="Resources\diceFive.png" />
+    <Content Include="Resources\diceFour.png" />
+    <Content Include="Resources\diceOne.png" />
+    <Content Include="Resources\diceSix.png" />
+    <Content Include="Resources\diceThree.png" />
+    <Content Include="Resources\diceTwo.png" />
+    <Content Include="Resources\greenBoard.jpg" />
+    <Content Include="Resources\head.png" />
+    <Content Include="Resources\Tail.png" />
     <Content Include="SOI.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -113,7 +122,16 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Coin.cs" />
+    <Compile Include="Model\Dice.cs" />
+    <Compile Include="Model\PlayerScoreboard.cs" />
+    <Compile Include="Model\PlayerScoreBoardAppModel.cs" />
+    <Compile Include="Model\PlayerScoreboardPostix.cs" />
+    <Compile Include="Model\TokenGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scoreboard.xaml.cs">
+      <DependentUpon>Scoreboard.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -157,7 +175,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Scoreboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
